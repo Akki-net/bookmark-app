@@ -111,6 +111,7 @@ input, textarea {
 }
 input[type=submit], a.button {
     font-weight:bold;
+    cursor: pointer;
     background:#12c064;
     color:#fff;
     padding:10px 20px;
@@ -129,4 +130,17 @@ input[type=submit], a.button {
     clear:both;
     float:left;
     font-size:13px;
+}
+#logged_out{
+    display: inline-flex;
+}
+#logged_out input[type="submit"]{
+    font: unset;
+    cursor: pointer;
+    text-transform: none;
+    color: #f3f7cc;
+    padding: unset;
+}
+#logged_out input[type="submit"]:hover {
+    color: #fff;
 }

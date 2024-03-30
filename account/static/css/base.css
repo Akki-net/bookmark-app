@@ -185,3 +185,21 @@ ul.messages li a.close {
 .login-form {
     float:left;
 }
+/* social-auth */
+.social {
+    float:right;
+}
+.social li {
+    list-style:none;
+    padding:10px 20px;
+    margin:0 0 10px 0;
+}
+.social li a {
+    width:100%;
+    height:100%;
+    display:block;
+    color:#fff;
+}
+.social li.facebook { background:#3b5399; }
+.social li.twitter { background:#00cffa; }
+.social li.google { background:#de1710; }

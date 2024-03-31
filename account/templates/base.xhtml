@@ -51,6 +51,11 @@
     function closeMessage(id, tag) {
         document.querySelector(`.messages .${tag}`).style.display = "none";
     }
-    </script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // DOM loaded
+      `{% block domready %}
+      {% endblock %}`
+    })
+  </script>
 </body>
 </html>

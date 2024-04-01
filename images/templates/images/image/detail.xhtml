@@ -53,7 +53,7 @@
     var formData = new FormData();
     formData.append('id', likeButton.dataset.id);
     formData.append('action', likeButton.dataset.action);
-    option['body'] = formData;
+    options['body'] = formData;
     <!-- send HTTP request -->
     fetch(url, options)
         .then(response => response.json())

@@ -14,7 +14,7 @@
           <a href="{% url "dashboard" %}">My dashboard</a>
         </li>
         <li {% if section == "images" %}class="selected"{% endif %}>
-          <a href="#">Images</a>
+          <a href="{% url "images:list" %}">Images</a>
         </li>
         <li {% if section == "people" %}class="selected"{% endif %}>
           <a href="#">People</a>
@@ -54,10 +54,10 @@
         document.querySelector(`.messages .${tag}`).style.display = "none";
     }
     document.addEventListener('DOMContentLoaded', (event) => {
-      // DOM loaded
-      `{% block domready %}
-      {% endblock %}`
-    })
+      // const body = document.getElementsByTagName['body'][0];
+      // body += 
+      {% block domready %}{% endblock %}
+    });
   </script>
 </body>
 </html>

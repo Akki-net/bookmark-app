@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -126,12 +127,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailBackend',
@@ -139,6 +144,7 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.google.GoogleOAuth2',
 ]
+
 SOCIAL_AUTH_FACEBOOK_KEY = '1607838723328183' # Facebook App ID
 SOCIAL_AUTH_FACEBOOK_SECRET = '7070edff14da80f09dcb1407cf52a0da' # Facebook App Secret
 SOCIAL_AUTH_TWITTER_KEY = 'EDZMB75Z7gXbsNTlMJQJjHXqU' # Twitter API Key
@@ -157,7 +163,13 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
 ]
+
 if DEBUG:
     import mimetypes
     mimetypes.add_type('application/javascript', '.js', True)
     mimetypes.add_type('text/css', '.css', True)
+    
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail',
+                                        args=[u.username])
+}

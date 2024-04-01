@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, UserRegistration, \
@@ -6,6 +6,7 @@ from .forms import LoginForm, UserRegistration, \
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from django.contrib import messages
+from django.contrib.auth.models import User
 @login_required
 def dashboard(request):
     return render(request, "account/dashboard.xhtml", {"section": "dashboard"})
@@ -63,4 +64,19 @@ def edit(request):
     return render(request, "account/edit.xhtml", {
         "user_form": user_form,
         "profile_form": profile_form
+    })
+@login_required
+def user_list(request):
+    users = User.objects.filter(is_active=True)
+    return render(request, 'account/user/list.xhtml', {
+        'section': 'people',
+        'users': users
+    })
+@login_required
+def user_detail(request, username):
+    user = get_object_or_404(User, username=username,
+                                is_active=True)
+    return render(request, 'account/user/detail.xhtml', {
+        'section': 'people',
+        'user': user
     })

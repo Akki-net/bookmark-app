@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_POST
 from .models import Contact
+from actions.utils import create_action
 @login_required
 def dashboard(request):
     return render(request, "account/dashboard.xhtml", {"section": "dashboard"})
@@ -40,6 +41,7 @@ def register(request):
             )
             new_user.save()
             Profile.objects.create(user=new_user)
+            create_action(new_user, 'has created an account')
             return render(request, "account/register_done.xhtml", {
                 'new_user': new_user
             })
@@ -95,6 +97,7 @@ def user_follow(request):
                     user_from=request.user,
                     user_to=user
                 )
+                create_action(request.user, 'is following', user)
             else:
                 Contact.objects.filter(user_from=request.user, 
                                     user_to=user).delete()
